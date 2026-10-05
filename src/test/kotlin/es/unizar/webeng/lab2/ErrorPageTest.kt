@@ -19,7 +19,7 @@ import org.springframework.http.MediaType
 @AutoConfigureTestRestTemplate
 class ErrorPageTest {
     @LocalServerPort
-    private var port: Int = 8080
+    private var port: Int = 8443
 
     @Autowired
     private lateinit var client: TestRestTemplate
