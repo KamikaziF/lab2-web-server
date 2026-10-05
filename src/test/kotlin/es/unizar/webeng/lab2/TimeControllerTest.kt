@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.time.LocalDateTime
+import java.time.ZoneId
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -26,10 +27,14 @@ class TimeControllerTest {
     fun timeIsJson() {
         // Definir una fecha en concreto
         val expectedTime = LocalDateTime.of(2026, 10, 5, 10, 0, 15)
+        val zone = ZoneId.of("Europe/Madrid")
         given(timeProvider.now()).willReturn(expectedTime)
         mockMvc
-            .perform(get("/time").accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk)
+            .perform(
+                get("/time")
+                    .param("zone", "Europe/Madrid")
+                    .accept(MediaType.APPLICATION_JSON),
+            ).andExpect(status().isOk)
             .andExpect(jsonPath("$.time").value(expectedTime.toString()))
     }
 }
