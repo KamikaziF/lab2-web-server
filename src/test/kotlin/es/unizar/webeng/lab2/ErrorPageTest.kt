@@ -15,7 +15,10 @@ import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+    webEnvironment = WebEnvironment.RANDOM_PORT,
+    properties = ["server.ssl.enabled=false"] // Desactiva SSL durante las pruebas
+)
 @AutoConfigureTestRestTemplate
 class ErrorPageTest {
     @LocalServerPort
@@ -28,9 +31,9 @@ class ErrorPageTest {
     fun unknownPathRendersErrorHtml() {
         val headers = HttpHeaders()
         headers.accept = listOf(MediaType.TEXT_HTML)
-        val response =
-            client.exchange(
-                "http://127.0.0.1:$port/missing",
+        val response = 
+            client.exchange (
+                "/missing",
                 HttpMethod.GET,
                 HttpEntity<Void>(headers),
                 String::class.java,

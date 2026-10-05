@@ -25,7 +25,7 @@ class TimeControllerTest {
     @Test
     fun timeIsJson() {
         // Definir una fecha en concreto
-        val expectedTime = LocalDateTime.of(2026, 10, 5, 10, 0, 0)
+        val expectedTime = LocalDateTime.of(2026, 10, 5, 10, 0, 15)
         given(timeProvider.now()).willReturn(expectedTime)
         mockMvc
             .perform(get("/time").accept(MediaType.APPLICATION_JSON))
