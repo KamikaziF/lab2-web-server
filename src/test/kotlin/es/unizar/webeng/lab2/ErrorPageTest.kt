@@ -17,7 +17,6 @@ import org.springframework.http.MediaType
 
 @SpringBootTest(
     webEnvironment = WebEnvironment.RANDOM_PORT,
-    properties = ["server.ssl.enabled=false"], // Desactiva SSL durante las pruebas
 )
 @AutoConfigureTestRestTemplate
 class ErrorPageTest {
